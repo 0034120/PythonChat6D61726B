@@ -64,8 +64,7 @@ class Camera:
 						client_socket2, addr2 = LocalServer.accept()
 						chom = client_socket2.recv(1024).decode()
 						if chom == 'ERROR':
-							asdf = 'error'
-							print(asdf)
+							print("ERROR")
 
 				client_socket.connect((host_ip,self.port))
 
