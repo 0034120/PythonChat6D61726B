@@ -15,6 +15,7 @@ try:
 
 	# initialize list/set of all connected client's sockets
 	client_sockets = set()
+	client_addresses = set()
 	# create a TCP socket
 	s = socket.socket()
 	# make the port as reusable port
@@ -25,7 +26,7 @@ try:
 	s.listen(5)
 	print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
 
-	def listen_for_client(cs):
+	def listen_for_client(cs,address):
 		"""
 		This function keep listening for a message from `cs` socket
 		whenever a message is received, broadcast it to all other connected clients
@@ -39,10 +40,14 @@ try:
 				# remove it from the set
 				print(f"[!] Error: {e}")
 				client_sockets.remove(cs)
+				client_addresses.remove(address)
 			else:
-				# if we received a message, replace the <SEP>
-				# token with ": " for nice printing
-				msg = msg.replace(separator_token, ": ")
+				if msg == f"{separator_token}LISTCLIENT{separator_token}":
+					cs.send(f'REQUEST FROM {address}: LISTCLIENTS\n{client_addresses}'.encode())
+				else:
+					# if we received a message, replace the <SEP>
+					# token with ": " for nice printing
+					msg = msg.replace(separator_token, ": ")
 			# iterate over all connected sockets
 			for client_socket in client_sockets:
 				# and send the message
@@ -62,9 +67,10 @@ try:
 		client_socket, client_address = s.accept()
 		print(f"[+] {client_address} connected.")
 		# add the new connected client to connected sockets
+		client_addresses.add(client_address[0])
 		client_sockets.add(client_socket)
 		# start a new thread that listens for each clients messages
-		t = Thread(target=listen_for_client, args=(client_socket,))
+		t = Thread(target=listen_for_client, args=(client_socket,client_address,))
 		# make the thread daemon so it ends whenever the main thread ends
 		t.daemon = True
 		# start the thread

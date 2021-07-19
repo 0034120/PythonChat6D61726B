@@ -130,6 +130,11 @@ try:
 			except Exception as e:
 				print(e)
 		
+		if to_send.startswith('/ChangeColor'):
+			TempColor = int(to_send.split(' ')[1])
+			print(TempColor)
+			client_color = colors[TempColor]
+
 		if to_send == '/help':
 			date_now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 			print(f"""{client_color}[{date_now}] {name}: \t/transfer\n\t\t\t\t/quit\n\t\t\t\t/help\n\t\t\t\t/pwd
@@ -137,6 +142,9 @@ try:
 
 		if to_send == '/RequestUpdate':
 			s2.send('RUpdate'.encode())
+
+		if to_send == '/ListClients':
+			s.send(f"{separator_token}LISTCLIENT{separator_token}".encode())
 
 		if to_send.startswith('/transfer'):
 			transfer_host = to_send.split(" ")

@@ -19,7 +19,7 @@ class Camera:
 		while True:
 			try:
 				client_socket,addr = Server_Socket.accept()
-				print("GOT CONNECTION FROM:",addr)
+				#print("GOT CONNECTION FROM:",addr)
 				if client_socket:
 					Red = client_socket.recv(1024).decode().split(' ')
 					CamNo = int(Red[0])
@@ -32,12 +32,12 @@ class Camera:
 						#cv2.imshow('TRANSMITTING VIDEO',frame)
 						key = cv2.waitKey(1) & 0xFF
 			except Exception as e:
-				print(e)
+				#print(e)
 				try:
 					vid.release()
 				except Exception as e:
-					print(e)
-					print(len(Red))
+					#print(e)
+					#print(len(Red))
 					ClientSocket = socket.socket()
 					client_socket2, addr2 = ClientSocket.connect((addr[0],Red[1]))
 					client_socket2.send('ERROR'.encode())
