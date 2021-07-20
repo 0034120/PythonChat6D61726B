@@ -1,4 +1,4 @@
-def main(local=False):
+def main(local=False,is_main=True):
 	while True:
 		try:
 			import socket
@@ -43,7 +43,10 @@ def main(local=False):
 				SERVER_HOST = "0.0.0.0"
 
 				if local:
-					SERVER_PORT = 5004
+					if is_main==True:
+						SERVER_PORT = 5004
+					if is_main==False:
+						SERVER_PORT = 4974
 
 				else:
 					SERVER_PORT = 5001

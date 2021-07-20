@@ -10,7 +10,10 @@ def main(IsMain=True):
 
 		# server's IP address
 		SERVER_HOST = "0.0.0.0"
-		SERVER_PORT = 5002 # port we want to use
+		if IsMain==True:
+			SERVER_PORT = 5002 # port we want to use
+		if IsMain==False:
+			SERVER_PORT = 5985
 		separator_token = "<SEPARATOR>" # we will use this to separate the client name & message
 
 

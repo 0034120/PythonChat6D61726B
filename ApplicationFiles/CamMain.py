@@ -6,11 +6,19 @@ class Camera:
 		self.host = '0.0.0.0'
 		self.port = 2945
 		self.port2 = 2946
+		self.portNo1 = 9476
+		self.portNo2 = 9475
 		self.socket_address = (self.host,self.port)
+		self.socket_addressNo2 = (self.host, self.portNo1)
 
-	def Server(self):
+	def Server(self,is_main=True):
 		Server_Socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-		Server_Socket.bind(self.socket_address)
+		if is_main==True:
+			Server_Socket.bind(self.socket_address)
+			print('a')
+		if is_main==False:
+			Server_Socket.bind(self.socket_addressNo2)
+			print('b')
 
 		Server_Socket.listen(5)
 
@@ -45,7 +53,7 @@ class Camera:
 				client_socket.close()
 				#cv2.destroyAllWindows()
 
-	def Client(self, host_ip=None, CameraNo=0):
+	def Client(self, host_ip=None, CameraNo=0,is_main=True):
 		Count = 0
 		PQuit = False
 		BreakOut = False
@@ -57,7 +65,10 @@ class Camera:
 					host_ip = input("Host IP: ")
 
 				LocalServer = socket.socket()
-				LocalServer.bind((self.host,self.port2))
+				if is_main==True:
+					LocalServer.bind((self.host,self.port2))
+				if is_main==False:
+					LocalServer.bind((self.host,self.portNo2))
 
 				def CrashReloadOnError():
 					while True:
