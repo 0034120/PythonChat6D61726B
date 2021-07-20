@@ -68,7 +68,7 @@ def main(IsMain=True):
 								if msg[i] in BlackList:
 									BlackList.pop(BlackList.index(msg[i]))
 								elif msg[i] not in BlackList:
-									cs.send(f"ADDRESS IS NOT IN BLACKLIST ALREADY WHITELISTED\n\nBlacklist contains...\n\n{BlackList}".encode())
+									cs.send(f"ADDRESS IS NOT IN BLACKLIST ALREADY WHITELISTED\n\nBlacklist contains...\n\n{BlackList}")
 						continue
 
 					if msg.startswith(f"{separator_token}ADDBLACKLIST{separator_token}"):# anaad (address == '127.0.0.1' or address == socket.gethostbyname(socket.gethostname())):

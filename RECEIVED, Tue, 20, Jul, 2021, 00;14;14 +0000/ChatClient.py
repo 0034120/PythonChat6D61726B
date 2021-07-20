@@ -140,13 +140,9 @@ try:
 			s2.close()
 
 		if to_send.startswith('/ChangeColor'):
-			try:
-				TempColor = int(to_send.split(' ')[1])
-				print(TempColor)
-				client_color = colors[TempColor]
-			except Exception as e:
-				print(e)
-				print("ERROR COLOR COUNT TOO HIGH/LOW")
+			TempColor = int(to_send.split(' ')[1])
+			print(TempColor)
+			client_color = colors[TempColor]
 
 		if to_send == '/help':
 			date_now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
