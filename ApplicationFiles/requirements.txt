@@ -1,5 +1,5 @@
 colorama==0.4.4
-cryptography==42.0.2
+cryptography==42.0.4
 numpy==1.22.0
 opencv-python==4.5.2.54
 requests==2.31.0
