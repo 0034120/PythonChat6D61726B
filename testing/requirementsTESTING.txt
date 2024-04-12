@@ -9,7 +9,7 @@ cryptography==42.0.4
 cycler==0.10.0
 decorator==5.0.9
 easygui==0.98.2
-idna==3.2
+idna==3.7
 ipython==8.10.0
 ipython-genutils==0.2.0
 jedi==0.18.0
