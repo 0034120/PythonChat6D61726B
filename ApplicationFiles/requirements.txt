@@ -4,4 +4,4 @@ numpy==1.22.0
 opencv-python==4.5.2.54
 requests==2.31.0
 six==1.16.0
-tqdm==4.61.1
+tqdm==4.66.3
